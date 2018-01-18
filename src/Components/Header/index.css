@@ -1,0 +1,11 @@
+.header a{
+    padding: 10px;
+    background: #a6a6a6;
+    text-decoration: none;
+    margin: 10px;
+}
+
+.header a:hover,
+.header a:visited{
+    text-decoration: none;
+}

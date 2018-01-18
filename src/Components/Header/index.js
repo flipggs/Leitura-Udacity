@@ -1,21 +1,27 @@
 import React, { Component } from 'react'
-import { pushRotate as Menu } from 'react-burger-menu'
+import './index.css'
+import { get } from '../../Services/ReadbleAPI'
 
 class Header extends Component {
-    showSettings (event) {
-        event.preventDefault();
-      }
+    state = {
+        categories: []
+    }
+    componentDidMount() {
+
+        get("/categories").then(res => {
+            this.setState({ categories: res.data.categories })
+        })
+    }
 
     render() {
         return (
-            <div>
-                <Menu>
-                    <a id="home" className="menu-item" href="/">Home</a>
-                    <a id="about" className="menu-item" href="/about">About</a>
-                    <a id="contact" className="menu-item" href="/contact">Contact</a>
-                    <a onClick={this.showSettings} className="menu-item--small" href="">Settings</a>
-                </Menu>
-            </div>
+            <header className="header">
+                <a href="/" >Home </a>
+                <a href="/" >New Post </a>
+                {this.state.categories.map(categorie => (
+                    <a key={categorie.path} href={categorie.path} >{categorie.name} </a>
+                ))}
+            </header>
         )
     }
 }

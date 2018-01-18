@@ -6,6 +6,10 @@ class App extends Component {
     return (
       <div className="App">
         <Header />
+
+        <div id="page-wrap">
+          <h1>Conteudo</h1>
+        </div>
       </div>
     );
   }
