@@ -1,19 +1,22 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
 import './index.css'
-import { get } from '../../Services/ReadbleAPI'
+import { getCategories } from '../../Actions/categories'
+
 
 class Header extends Component {
     state = {
         categories: []
     }
-    componentDidMount() {
 
-        get("/categories").then(res => {
-            this.setState({ categories: res.data.categories })
-        })
+    componentDidMount() {
+        this.props.fetchData();
+        console.log('this.props', this.props)
     }
 
     render() {
+        
         return (
             <header className="header">
                 <a href="/" >Home </a>
@@ -26,4 +29,18 @@ class Header extends Component {
     }
 }
 
-export default Header
+const mapStateToProps = (state) => {
+    console.log('state', state)
+    return {
+        categories: state.categories
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    fetchData: () => {
+        console.log('fetch')
+        return dispatch(getCategories())
+    }
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(Header)
