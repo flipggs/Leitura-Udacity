@@ -1,35 +1,41 @@
 import { get } from '../Services/ReadbleAPI'
 
-export const CATEGORIES_SUCCESS = 'CATEGORIES_SUCCESS'
-export const CATEGORIES_ERROR = 'CATEGORIES_ERROR'
+export const CATEGORIES_IS_LOADING = 'CATEGORIES_IS_LOADING'
+export const CATEGORIES_HAS_ERRORED = 'CATEGORIES_HAS_ERRORED'
+export const CATEGORIES_FETCH_DATA_SUCCESS = 'CATEGORIES_FETCH_DATA_SUCCESS'
 
-export function categoriesSuccess(categories) {
+export function categoriesIsLoading (bool) {
     return {
-        type: CATEGORIES_SUCCESS,
-        categories
+      type: CATEGORIES_IS_LOADING,
+      isLoading: bool
     }
-}
-
-export function categoriesError(bool) {
+  }
+  
+  export function categoriesHasErrored (bool) {
     return {
-        type: CATEGORIES_ERROR,
-        hasErrored: bool
+      type: CATEGORIES_HAS_ERRORED,
+      hasErrored: bool
     }
-}
+  }
+  
+  export function categoriesFetchDataSuccess (categories) {
+    return {
+      type: CATEGORIES_FETCH_DATA_SUCCESS,
+      categories
+    }
+  }
+  
 
-export function getCategories() {
-
+export function categoriesFetchData() {
+    const url = 'http://localhost:3001/categories'
     return (dispatch) => {
-
-        get('/categories')
-            .then(res => {
-                console.log('res', res)
-                return res.data
-            })
-            .then(categories => {
-
-                return dispatch(categoriesSuccess(categories))
-            })
-            .catch(() => dispatch(categoriesError(true)))
+      dispatch(categoriesIsLoading(true))
+      get(url)
+        .then(res => {
+          dispatch(categoriesIsLoading(false))
+          return res.data
+        })
+        .then(categories => dispatch(categoriesFetchDataSuccess(categories)))
+        .catch(() => dispatch(categoriesHasErrored(true)))
     }
-}
+  }
