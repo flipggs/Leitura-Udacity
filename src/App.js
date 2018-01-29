@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from './Components/Header'
 
+import Home from './Views/Home'
+
 class App extends Component {
   render() {
     return (
@@ -8,7 +10,7 @@ class App extends Component {
         <Header />
 
         <div id="page-wrap">
-          <h1>Conteudo</h1>
+          <Home />
         </div>
       </div>
     );

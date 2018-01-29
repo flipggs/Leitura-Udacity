@@ -19,7 +19,9 @@ class Header extends Component {
             <header>
                 <a href="/" >Home </a>
                 <a href="/" >New Post </a>
-                
+                {categories.map(category => (
+                    <a href={category.path} key={category.path}> {category.name} </a>
+                ))}
             </header>
         )
     }

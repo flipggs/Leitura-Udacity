@@ -35,8 +35,8 @@ export function categoriesFetchData() {
         dispatch(categoriesIsLoading(false))
         return res.data
       })
-      .then(categories => {
-        return dispatch(categoriesFetchDataSuccess(categories))
+      .then(data => {
+        return dispatch(categoriesFetchDataSuccess(data.categories))
       })
       .catch((e) => {
         console.log('error', e)
