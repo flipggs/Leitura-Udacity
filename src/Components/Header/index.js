@@ -13,24 +13,30 @@ class Header extends Component {
 
     render() {
         const { categories = {} } = this.props
-        console.log('render categories', categories);
+        console.log('render categories', JSON.stringify(categories));
 
         return (
             <header>
                 <a href="/" >Home </a>
                 <a href="/" >New Post </a>
-               
+                
             </header>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    categories: state.categories
-})
+const mapStateToProps = (state) => {
+    return {
+        categories: state.categories
+    }
+}
 
-const mapDispatchToProps = (dispatch) => ({
-    fetchData: () => dispatch(categoriesFetchData())
-})
+const mapDispatchToProps = (dispatch) => {
+    return {
+        fetchData: () => {
+            return dispatch(categoriesFetchData())
+        }
+    }
+}
 
 export default connect(mapStateToProps, mapDispatchToProps)(Header)
