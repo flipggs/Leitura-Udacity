@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import './index.css'
-import { categoriesFetchData } from '../../Actions/categories'
+import { getCategories } from '../../Actions/categories'
 
 
 class Header extends Component {
@@ -36,7 +36,7 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         fetchData: () => {
-            return dispatch(categoriesFetchData())
+            return dispatch(getCategories())
         }
     }
 }

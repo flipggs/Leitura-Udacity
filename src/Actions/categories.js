@@ -1,46 +1,27 @@
 import { get } from '../Services/ReadbleAPI'
 
-export const CATEGORIES_IS_LOADING = 'CATEGORIES_IS_LOADING'
-export const CATEGORIES_HAS_ERRORED = 'CATEGORIES_HAS_ERRORED'
-export const CATEGORIES_FETCH_DATA_SUCCESS = 'CATEGORIES_FETCH_DATA_SUCCESS'
+export const GET_ALL_CATEGORIES = 'GET_ALL_CATEGORIES'
 
-export function categoriesIsLoading(bool) {
-  return {
-    type: CATEGORIES_IS_LOADING,
-    isLoading: bool
-  }
-}
 
-export function categoriesHasErrored(bool) {
+export function getAllCategories(categories) {
   return {
-    type: CATEGORIES_HAS_ERRORED,
-    hasErrored: bool
-  }
-}
-
-export function categoriesFetchDataSuccess(categories) {
-  return {
-    type: CATEGORIES_FETCH_DATA_SUCCESS,
+    type: GET_ALL_CATEGORIES,
     categories
   }
 }
 
-
-export function categoriesFetchData() {
+export function getCategories() {
   
   return (dispatch) => {
-    dispatch(categoriesIsLoading(true))
     get('/categories')
       .then(res => {
-        dispatch(categoriesIsLoading(false))
         return res.data
       })
       .then(data => {
-        return dispatch(categoriesFetchDataSuccess(data.categories))
+        return dispatch(getAllCategories(data.categories))
       })
       .catch((e) => {
         console.log('error', e)
-        return dispatch(categoriesHasErrored(true))
       })
   }
 }
