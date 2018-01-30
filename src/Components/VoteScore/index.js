@@ -6,7 +6,19 @@ class VoteScore extends Component {
     }
 
     componentDidMount() {
-        this.setState({ score: this.props.score })
+        this.setState({ score: parseInt(this.props.score) })
+    }
+
+    sumScore = () => {
+        this.setState((prevState, state) => {
+            return { score: prevState.score + 1 }
+        })
+    }
+    
+    subtractScore = () => {
+        this.setState((prevState, state) => {
+            return { score: prevState.score - 1 }
+        })
     }
 
     render() {
@@ -15,13 +27,13 @@ class VoteScore extends Component {
                 <span>
                     Score:
                 </span>
-                <button>
+                <button onClick={() => this.sumScore()}>
                     +
                 </button>
                 <span>
                     {this.state.score}
                 </span>
-                <button>
+                <button onClick={() => this.subtractScore()}>
                     -
                 </button>
             </div>
