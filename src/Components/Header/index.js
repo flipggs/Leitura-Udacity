@@ -13,7 +13,7 @@ class Header extends Component {
 
     render() {
         const { categories = {} } = this.props
-        console.log('render categories', JSON.stringify(categories));
+        //console.log('render categories', JSON.stringify(categories));
 
         return (
             <header>

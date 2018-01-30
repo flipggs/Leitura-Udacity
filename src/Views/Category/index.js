@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import Post from './../../Components/Post/index';
+import { connect } from 'react-redux'
+
+import { getPosts } from '../../Actions/posts'
+import ListPosts from './../../Components/ListPosts/index';
 
 class Category extends Component {
 
     state = {
         categoryName: ''
-    }
-
-    componentDidMount() {
-        this.setState({ categoryName: this.getCategoryName() })
     }
 
     getCategoryName = () => {
@@ -17,20 +16,36 @@ class Category extends Component {
         return params.category
     }
 
+    componentDidMount() {
+        const categoryName = this.getCategoryName()
+        this.props.getData(categoryName)
+
+        this.setState({ categoryName })
+    }
+
     render() {
+
+        const { posts = [] } = this.props
+        console.log('posts', posts);
 
         return (
             <div>
                 <h2>{this.state.categoryName}</h2>
-                {/* {posts.map(post => (
-                    <Post key={post.id}
-                        author={post.author}
-                        title={post.title}
-                        voteScore={post.voteScore} />
-                ))} */}
+                <ListPosts posts={posts} />
             </div>
         )
     }
 }
 
-export default Category
+const mapStateToProps = (state) => {
+    return {
+        posts: state.posts
+    }
+}
+
+const mapDispatchToProps = (dispatch) => ({
+    getData: (idCategory) => dispatch(getPosts(idCategory)),
+})
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(Category)

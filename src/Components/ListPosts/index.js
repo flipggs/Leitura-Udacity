@@ -1,4 +1,4 @@
-import React  from 'react'
+import React from 'react'
 import Post from './../Post'
 
 const ListPosts = (props) => {
@@ -6,12 +6,14 @@ const ListPosts = (props) => {
     return (
         <div>
 
-            {posts.map(post => (
+            {posts.length > 0 && posts.map(post => (
                 <Post key={post.id}
                     author={post.author}
                     title={post.title}
                     voteScore={post.voteScore} />
             ))}
+
+            {posts.length === 0 && (<h3>Nenhum post encontrado</h3>)}
 
         </div>
     )

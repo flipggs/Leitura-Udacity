@@ -1,6 +1,7 @@
 import { get } from '../Services/ReadbleAPI'
 
-export const GET_ALL_POSTS = 'POSTS_FETCH_DATA_SUCCESS'
+export const GET_ALL_POSTS = 'GET_ALL_POSTS'
+export const GET_ALL_POSTS_BY_CATEGORY = 'GET_ALL_POSTS_BY_CATEGORY'
 
 export function getAllPosts(posts) {
   return {
@@ -9,16 +10,23 @@ export function getAllPosts(posts) {
   }
 }
 
-export function getPosts() {
-  
+export function getAllPostsByCategory(posts) {
+  return {
+    type: GET_ALL_POSTS_BY_CATEGORY,
+    posts
+  }
+}
+
+export function getPosts(category) {
+
+  let url = '/posts'
+  if (category)
+    url = `/${category}${url}`
+
   return (dispatch) => {
-    get('/posts')
-      .then(res => {
-        return res.data
-      })
-      .then(data => {    
-        return dispatch(getAllPosts(data))
-      })
+    get(url)
+      .then(res => res.data)
+      .then(data => dispatch(getAllPostsByCategory(data)))
       .catch((e) => {
         console.log('error', e)
       })
