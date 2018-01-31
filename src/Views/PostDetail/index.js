@@ -5,7 +5,7 @@ class PostDetail extends Component {
     render() {
         return (
             <div>
-                
+                Teste
             </div>
         )
     }

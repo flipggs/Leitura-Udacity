@@ -8,9 +8,7 @@ const ListPosts = (props) => {
 
             {posts.length > 0 && posts.map(post => (
                 <Post key={post.id}
-                    author={post.author}
-                    title={post.title}
-                    voteScore={post.voteScore} />
+                    postData={post} />
             ))}
 
             {posts.length === 0 && (<h3>Nenhum post encontrado</h3>)}

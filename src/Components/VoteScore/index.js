@@ -6,7 +6,7 @@ class VoteScore extends Component {
     }
 
     componentDidMount() {
-        this.setState({ score: parseInt(this.props.score) })
+        this.setState({ score: this.props.score })
     }
 
     sumScore = () => {

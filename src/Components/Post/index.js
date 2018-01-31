@@ -1,14 +1,17 @@
 import React, { Component } from 'react'
-import VoteScore from './../VoteScore/index';
+import { Link } from 'react-router-dom'
+import VoteScore from './../VoteScore'
 
 class Post extends Component {
 
     render() {
-        const { author, title, voteScore } = this.props
+        const { author, title, voteScore, category, id } = this.props.postData
         return (
             <div>
                 <h3>
-                    {title}
+                    <Link to={`/${category}/${id}`}>
+                        {title}
+                    </Link>
                 </h3>
                 <span>
                     Author: {author}
