@@ -1,7 +1,8 @@
-import { get } from '../Services/ReadbleAPI'
+import { get, post } from '../Services/ReadbleAPI'
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_ALL_POSTS_BY_CATEGORY = 'GET_ALL_POSTS_BY_CATEGORY'
+export const GET_POST = 'GET_POST'
 
 export function getAllPosts(posts) {
   return {
@@ -14,6 +15,13 @@ export function getAllPostsByCategory(posts) {
   return {
     type: GET_ALL_POSTS_BY_CATEGORY,
     posts
+  }
+}
+
+export function getPost(post) {
+  return {
+    type: GET_POST,
+    post
   }
 }
 
@@ -30,5 +38,30 @@ export function getPosts(category) {
       .catch((e) => {
         console.log('error', e)
       })
+  }
+}
+
+export function getPostById(postId) {
+
+  const url = `/posts/${postId}`
+
+  return (dispatch) => {
+    get(url)
+      .then(res => res.data)
+      .then(data => dispatch(getPost(data)))
+      .catch(e => console.log('error getPostById', e))
+  }
+}
+
+export function updateScorePost(postId, option) {
+  const url = `/posts/${postId}`
+  return (dispatch) => {
+    post(url, { option })
+      .then(res => {
+        console.log(res)
+        return res.data
+      })
+      .then(data => dispatch())
+      .catch(e => console.log('error updateScorePost', e))
   }
 }

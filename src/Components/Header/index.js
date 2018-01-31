@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-
 import './index.css'
 import { getCategories } from '../../Actions/categories'
 
@@ -32,12 +31,13 @@ class Header extends Component {
 
         return (
             <header>
+                
                 <a href="/"
                     className={this.state.categoryName === '' ? 'active' : ''}
                 >Home </a>
                 <a href="/" >New Post </a>
                 {categories.map(category => (
-                    <a href={category.path}
+                    <a href={`/${category.path}`}
                         className={this.state.categoryName === category.categoryName ? 'active' : ''}
                         key={category.path}>
                         {category.name}
