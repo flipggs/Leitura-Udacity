@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
 import { getPostById } from '../../Actions/posts'
+import { getCommentsByPostId } from '../../Actions/comments'
+
 import VoteScore from './../../Components/VoteScore'
+import ListComments from './../../Components/ListComments'
 
 class PostDetail extends Component {
 
@@ -11,10 +14,11 @@ class PostDetail extends Component {
         const { params = {} } = match
         const postId = params.post_id
         this.props.getData(postId)
+        this.props.getComments(postId)
     }
 
     render() {
-        const { post } = this.props
+        const { post, comments } = this.props
 
         return (
             <div>
@@ -34,20 +38,21 @@ class PostDetail extends Component {
                     {post.body}
                 </article>
 
+                <ListComments comments={comments} />
 
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        post: state.post
-    }
-}
+const mapStateToProps = (state) => ({
+    post: state.post,
+    comments: state.comments
+})
 
 const mapDispatchToProps = (dispatch) => ({
     getData: (postId) => dispatch(getPostById(postId)),
+    getComments: (postId) => dispatch(getCommentsByPostId(postId))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)

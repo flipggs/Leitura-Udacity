@@ -42,11 +42,8 @@ export function getPosts(category) {
 }
 
 export function getPostById(postId) {
-
-  const url = `/posts/${postId}`
-
   return (dispatch) => {
-    get(url)
+    get(`/posts/${postId}`)
       .then(res => res.data)
       .then(data => dispatch(getPost(data)))
       .catch(e => console.log('error getPostById', e))
