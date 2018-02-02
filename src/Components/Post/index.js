@@ -14,7 +14,7 @@ class Post extends Component {
                     </Link>
                 </h3>
                 <span>
-                    Author: {author}
+                    <b>by:</b> {author}
                 </span>
                 <VoteScore score={voteScore} />
             </div>

@@ -3,6 +3,9 @@ header a{
     background: #a6a6a6;
     text-decoration: none;
     margin: 10px;
+    text-align: center;
+    line-height: 28px;
+    font-size: 14px;
 }
 
 header a:hover,
