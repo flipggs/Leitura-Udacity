@@ -1,14 +1,7 @@
 import React, { Component } from 'react';
 
 class VoteScore extends Component {
-    state = {
-        score: 0
-    }
-
-    componentDidMount() {
-        this.setState({ score: this.props.score })
-    }
-
+    
     sumScore = () => {
         this.setState((prevState, state) => {
             return { score: prevState.score + 1 }
@@ -22,18 +15,21 @@ class VoteScore extends Component {
     }
 
     render() {
+		
+	const {score, onClickVoteScore} = this.props
+		
         return (
             <div>
                 <span>
                     Score:
                 </span>
-                <button onClick={() => this.sumScore()}>
+                <button onClick={() => onClickVoteScore('upVote')}>
                     +
                 </button>
                 <span>
-                    {this.state.score}
+                    {score}
                 </span>
-                <button onClick={() => this.subtractScore()}>
+                <button onClick={() => onClickVoteScore('downVote')}>
                     -
                 </button>
             </div>
