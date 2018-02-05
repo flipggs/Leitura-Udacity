@@ -2,15 +2,36 @@ import {
     GET_ALL_POSTS,
     GET_ALL_POSTS_BY_CATEGORY,
     GET_POST,
-	INSERT_UPDATE_POST
+    INSERT_UPDATE_POST
 } from '../Actions/posts'
 
 
-function updatePost(state, action){
-	console.log('action', action)
-	console.log('state', state)
-	
-	}
+function updatePost(state, action) {
+    const post = state.find(item => {
+        if (item.id === action.post.id)
+            return item
+
+        return false
+    })
+
+    if (post){
+        const arr = state.map(item => {
+            if (item.id === post.id){
+                item = post
+            }
+
+            return item
+        })
+
+        return arr
+    }
+    else{
+        state.push(post)
+    }
+
+    return state
+
+}
 
 export function posts(state = [], action) {
     switch (action.type) {
@@ -18,9 +39,8 @@ export function posts(state = [], action) {
             return action.posts
         case GET_ALL_POSTS_BY_CATEGORY:
             return action.posts
-		case INSERT_UPDATE_POST:
-			updatePost(state, action)
-            return action.posts
+        case INSERT_UPDATE_POST:
+            return updatePost(state, action)
         default:
             return state
     }
