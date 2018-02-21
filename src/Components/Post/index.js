@@ -6,30 +6,15 @@ import { updateScorePost } from '../../Actions/posts'
 
 class Post extends Component {
 
-    state = {
-        voteScore: 0
-    }
-
-    componentDidMount() {
-        const { voteScore } = this.props.postData
-        this.setState({ voteScore })
-    }
-
     onClickVoteScore = (voteType) => {
 
         const { id } = this.props.postData
         this.props.updatePost(id, voteType)
-
-        this.setState(prev => {
-            const voteScore = voteType === 'upVote' ? prev.voteScore + 1 : prev.voteScore - 1
-            return { voteScore }
-        })
-
     }
 
     render() {
         const { author, title, category, id } = this.props.postData
-        const { voteScore } = this.state
+        const { voteScore } = this.props.postData || 0
 
         return (
             <div>

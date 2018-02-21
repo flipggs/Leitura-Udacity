@@ -7,30 +7,11 @@ import {
 
 
 function updatePost(state, action) {
-    const post = state.find(item => {
-        if (item.id === action.post.id)
-            return item
-
-        return false
+    return state.map(post => {
+        if (post.id === action.post.id)
+            return action.post
+        return post
     })
-
-    if (post){
-        const arr = state.map(item => {
-            if (item.id === post.id){
-                item = post
-            }
-
-            return item
-        })
-
-        return arr
-    }
-    else{
-        state.push(post)
-    }
-
-    return state
-
 }
 
 export function posts(state = [], action) {

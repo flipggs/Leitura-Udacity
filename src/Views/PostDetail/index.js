@@ -17,6 +17,18 @@ class PostDetail extends Component {
         this.props.getComments(postId)
     }
 
+    onClickVoteScore = (voteType) => {
+
+        const { id } = this.props.postData
+        this.props.updatePost(id, voteType)
+
+        this.setState(prev => {
+            const voteScore = voteType === 'upVote' ? prev.voteScore + 1 : prev.voteScore - 1
+            return { voteScore }
+        })
+
+    }
+
     render() {
         const { post, comments } = this.props
 
@@ -30,7 +42,7 @@ class PostDetail extends Component {
                 </span>
 
                 {post.voteScore && (
-                    <VoteScore score={post.voteScore} />
+                    <VoteScore score={post.voteScore} onClickVoteScore={this.onClickVoteScore} />
                 )}
 
 

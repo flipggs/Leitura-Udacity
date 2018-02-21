@@ -26,11 +26,11 @@ export function getPost(post) {
   }
 }
 
-export function insertUpdatePost(post){
-	return {
-		type: INSERT_UPDATE_POST,
-		post
-	}
+export function insertUpdatePost(post) {
+  return {
+    type: INSERT_UPDATE_POST,
+    post
+  }
 }
 
 export function getPosts(category) {
@@ -60,11 +60,11 @@ export function getPostById(postId) {
 
 export function updateScorePost(postId, option) {
   const url = `/posts/${postId}`
-  
-return (dispatch) => {    
-	post(url, { option })
+
+  return (dispatch) => {
+    post(url, { option })
       .then(res => res.data)
-	  .then(data => dispatch(insertUpdatePost(data)))
+      .then(data => dispatch(insertUpdatePost(data)))
       .catch(e => console.log('error updateScorePost', e))
-}
+  }
 }
