@@ -7,6 +7,8 @@ import { getCommentsByPostId } from '../../Actions/comments'
 import VoteScore from './../../Components/VoteScore'
 import ListComments from './../../Components/ListComments'
 
+import { updateScorePost } from '../../Actions/posts'
+
 class PostDetail extends Component {
 
     componentDidMount() {
@@ -19,14 +21,8 @@ class PostDetail extends Component {
 
     onClickVoteScore = (voteType) => {
 
-        const { id } = this.props.postData
+        const { id } = this.props.post
         this.props.updatePost(id, voteType)
-
-        this.setState(prev => {
-            const voteScore = voteType === 'upVote' ? prev.voteScore + 1 : prev.voteScore - 1
-            return { voteScore }
-        })
-
     }
 
     render() {
@@ -64,7 +60,8 @@ const mapStateToProps = (state) => ({
 
 const mapDispatchToProps = (dispatch) => ({
     getData: (postId) => dispatch(getPostById(postId)),
-    getComments: (postId) => dispatch(getCommentsByPostId(postId))
+    getComments: (postId) => dispatch(getCommentsByPostId(postId)),
+    updatePost: (id, option) => dispatch(updateScorePost(id, option))
 })
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetail)
