@@ -3,7 +3,8 @@ import {
     GET_ALL_POSTS_BY_CATEGORY,
     GET_POST,
     INSERT_POST,
-    UPDATE_POST
+    UPDATE_POST,
+    DELETE_POST
 } from '../Actions/posts'
 
 export function posts(state = [], action) {
@@ -15,6 +16,8 @@ export function posts(state = [], action) {
         case INSERT_POST:
             const newState = state.concat(action.post)
             return newState
+        case DELETE_POST:
+            return state.filter(post => post.id !== action.post.id)
         case UPDATE_POST:
             return state.map(post => {
                 if (post.id === action.post.id)

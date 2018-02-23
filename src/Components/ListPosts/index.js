@@ -3,6 +3,7 @@ import Post from './../Post'
 
 const ListPosts = (props) => {
     const { posts } = props || []
+
     return (
         <div>
 

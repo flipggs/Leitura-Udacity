@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Link } from 'react-router-dom'
 import { connect } from 'react-redux'
 import VoteScore from './../VoteScore'
-import { updateScorePost } from '../../Actions/posts'
+import { updateScorePost, deleteByPostId } from '../../Actions/posts'
 
 class Post extends Component {
 
@@ -12,8 +12,18 @@ class Post extends Component {
         this.props.updatePost(id, voteType)
     }
 
+    onClickEdit = () => {
+        const { id } = this.props.postData
+        console.log('edit', id);
+    }
+
+    onClickDelete = () => {
+        const { id } = this.props.postData
+        this.props.deletePost(id)
+    }
+
     render() {
-        const { author, title, category, id } = this.props.postData
+        const { author, title, category, id, commentCount } = this.props.postData
         const { voteScore } = this.props.postData || 0
 
         return (
@@ -27,6 +37,18 @@ class Post extends Component {
                     <b>by:</b> {author}
                 </span>
                 <VoteScore score={voteScore} onClickVoteScore={this.onClickVoteScore} />
+                <span>
+                    {commentCount} Comentários
+                </span>
+                <div>
+                    <button onClick={() => this.onClickEdit()}>
+                        Editar
+                    </button>
+
+                    <button onClick={() => this.onClickDelete()}>
+                        Remover
+                    </button>
+                </div>
             </div>
         )
     }
@@ -38,9 +60,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        updatePost: (id, option) => {
-            return dispatch(updateScorePost(id, option))
-        }
+        updatePost: (id, option) => dispatch(updateScorePost(id, option)),
+        deletePost: (id) => dispatch(deleteByPostId(id))
     }
 }
 

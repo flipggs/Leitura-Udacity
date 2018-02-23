@@ -1,10 +1,11 @@
-import { get, post } from '../Services/ReadbleAPI'
+import { get, post, deleteData } from '../Services/ReadbleAPI'
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_ALL_POSTS_BY_CATEGORY = 'GET_ALL_POSTS_BY_CATEGORY'
 export const GET_POST = 'GET_POST'
 export const INSERT_POST = 'INSERT_POST'
 export const UPDATE_POST = 'UPDATE_POST'
+export const DELETE_POST = 'DELETE_POST'
 
 export function getAllPosts(posts) {
   return {
@@ -30,6 +31,13 @@ export function getPost(post) {
 export function updatePost(post) {
   return {
     type: UPDATE_POST,
+    post
+  }
+}
+
+export function deletePost(post) {
+  return {
+    type: DELETE_POST,
     post
   }
 }
@@ -88,5 +96,16 @@ export function updateScorePost(postId, option) {
       .then(res => res.data)
       .then(data => dispatch(updatePost(data)))
       .catch(e => console.log('error updateScorePost', e))
+  }
+}
+
+export function deleteByPostId(postId) {
+  const url = `/posts/${postId}`
+
+  return (dispatch) => {
+    deleteData(url, { })
+      .then(res => res.data)
+      .then(data => dispatch(deletePost(data)))
+      .catch(e => console.log('error deleteByPostId', e))
   }
 }
