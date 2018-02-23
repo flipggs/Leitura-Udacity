@@ -9,7 +9,6 @@ import { updateScoreComment } from '../../Actions/comments'
 const Comment = (props) => {
     const { author, body, voteScore, id } = props.comment
 
-
     const onClickVoteScore = (voteType) => {
         props.updateComment(id, voteType)
     }

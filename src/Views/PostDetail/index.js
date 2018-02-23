@@ -20,7 +20,6 @@ class PostDetail extends Component {
     }
 
     onClickVoteScore = (voteType) => {
-
         const { id } = this.props.post
         this.props.updatePost(id, voteType)
     }
@@ -41,22 +40,18 @@ class PostDetail extends Component {
                     <VoteScore score={post.voteScore} onClickVoteScore={this.onClickVoteScore} />
                 )}
 
-
                 <article>
                     {post.body}
                 </article>
 
-                <ListComments comments={comments} />
+                <ListComments postId={post.id} comments={comments} />
 
             </div>
         )
     }
 }
 
-const mapStateToProps = (state) => ({
-    post: state.post,
-    comments: state.comments
-})
+const mapStateToProps = ({ post, comments }) => ({ post, comments })
 
 const mapDispatchToProps = (dispatch) => ({
     getData: (postId) => dispatch(getPostById(postId)),

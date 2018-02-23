@@ -19,8 +19,6 @@ const FormPost = (props) => {
             ...values
         }
         
-        console.log('form', post);
-
         props.insertPost(post)
     }
 

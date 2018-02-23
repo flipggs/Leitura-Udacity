@@ -13,8 +13,8 @@ export function posts(state = [], action) {
         case GET_ALL_POSTS_BY_CATEGORY:
             return action.posts
         case INSERT_POST:
-            state.push(action.post)
-            return state
+            const newState = state.concat(action.post)
+            return newState
         case UPDATE_POST:
             return state.map(post => {
                 if (post.id === action.post.id)

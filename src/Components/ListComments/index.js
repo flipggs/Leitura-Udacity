@@ -1,11 +1,16 @@
 import React from 'react'
 import Comment from './../Comment'
+import FormComment from '../../Components/FormComment'
 
 const ListComments = (props) => {
-    const { comments } = props || []
+    const { comments, postId } = props || []
+    
     return (
         <div>
             <h3>Comentários</h3>
+
+            <FormComment postId={postId} />
+
             {comments.map(comment => (
                 <Comment key={comment.id} comment={comment} />
             ))}
