@@ -2,7 +2,8 @@ import {
     GET_ALL_POSTS,
     GET_ALL_POSTS_BY_CATEGORY,
     GET_POST,
-    INSERT_UPDATE_POST
+    INSERT_POST,
+    UPDATE_POST
 } from '../Actions/posts'
 
 export function posts(state = [], action) {
@@ -11,7 +12,10 @@ export function posts(state = [], action) {
             return action.posts
         case GET_ALL_POSTS_BY_CATEGORY:
             return action.posts
-        case INSERT_UPDATE_POST:
+        case INSERT_POST:
+            state.push(action.post)
+            return state
+        case UPDATE_POST:
             return state.map(post => {
                 if (post.id === action.post.id)
                     return action.post
@@ -26,7 +30,7 @@ export function post(state = {}, action) {
     switch (action.type) {
         case GET_POST:
             return action.post
-        case INSERT_UPDATE_POST:
+        case UPDATE_POST:
             return action.post
         default:
             return state

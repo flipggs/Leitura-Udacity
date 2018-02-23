@@ -3,7 +3,8 @@ import { get, post } from '../Services/ReadbleAPI'
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_ALL_POSTS_BY_CATEGORY = 'GET_ALL_POSTS_BY_CATEGORY'
 export const GET_POST = 'GET_POST'
-export const INSERT_UPDATE_POST = 'INSERT_UPDATE_POST'
+export const INSERT_POST = 'INSERT_POST'
+export const UPDATE_POST = 'UPDATE_POST'
 
 export function getAllPosts(posts) {
   return {
@@ -26,9 +27,16 @@ export function getPost(post) {
   }
 }
 
-export function insertUpdatePost(post) {
+export function updatePost(post) {
   return {
-    type: INSERT_UPDATE_POST,
+    type: UPDATE_POST,
+    post
+  }
+}
+
+export function insertPost(post) {
+  return {
+    type: INSERT_POST,
     post
   }
 }
@@ -58,13 +66,27 @@ export function getPostById(postId) {
   }
 }
 
+export function insertNewPost(newPost) {
+  return (dispatch) => {
+    post('/posts', newPost)
+      .then(res => res.data)
+      .then(data =>
+        dispatch(insertPost({
+          ...newPost,
+          ...data
+        }))
+      )
+      .catch(e => console.log('error updateScorePost', e))
+  }
+}
+
 export function updateScorePost(postId, option) {
   const url = `/posts/${postId}`
 
   return (dispatch) => {
     post(url, { option })
       .then(res => res.data)
-      .then(data => dispatch(insertUpdatePost(data)))
+      .then(data => dispatch(updatePost(data)))
       .catch(e => console.log('error updateScorePost', e))
   }
 }

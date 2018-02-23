@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
+
 import './index.css'
 import { getCategories } from '../../Actions/categories'
 
@@ -32,16 +34,16 @@ class Header extends Component {
         return (
             <header>
                 
-                <a href="/"
+                <Link to="/"
                     className={this.state.categoryName === '' ? 'active' : ''}
-                >Home </a>
-                <a href="/" >New Post </a>
+                >Home </Link>
+                <Link to="/new" >New Post </Link>
                 {categories.map(category => (
-                    <a href={`/${category.path}`}
+                    <Link to={`/${category.path}`}
                         className={this.state.categoryName === category.categoryName ? 'active' : ''}
                         key={category.path}>
                         {category.name}
-                    </a>
+                    </Link>
                 ))}
             </header>
         )
