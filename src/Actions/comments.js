@@ -1,7 +1,8 @@
-import { get, post } from '../Services/ReadbleAPI'
+import { get, post, deleteData } from '../Services/ReadbleAPI'
 
 export const GET_ALL_COMMENTS_BY_POST_ID = 'GET_ALL_COMMENTS_BY_POST_ID'
-export const UPDATE_COMMENT = 'UPDATE_COMMENT'
+export const UPDATE_SCORE_COMMENT = 'UPDATE_SCORE_COMMENT'
+export const DELETE_COMMENT = 'DELETE_COMMENT'
 export const INSERT_COMMENT = 'INSERT_COMMENT'
 
 export function getAllComments(comments) {
@@ -20,7 +21,14 @@ export function insertComment(comment) {
 
 export function updateComment(comment) {
     return {
-        type: UPDATE_COMMENT,
+        type: UPDATE_SCORE_COMMENT,
+        comment
+    }
+}
+
+export function deleteComment(comment) {
+    return {
+        type: DELETE_COMMENT,
         comment
     }
 }
@@ -50,5 +58,16 @@ export function updateScoreComment(commentId, option) {
             .then(res => res.data)
             .then(data => dispatch(updateComment(data)))
             .catch(e => console.log('error updateScoreComment', e))
+    }
+}
+
+export function deleteCommentById(commentId) {
+    const url = `/comments/${commentId}`
+
+    return (dispatch) => {
+        deleteData(url, {})
+            .then(res => res.data)
+            .then(data => dispatch(deleteComment(data)))
+            .catch(e => console.log('error deleteCommentById', e))
     }
 }

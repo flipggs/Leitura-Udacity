@@ -123,11 +123,7 @@ export function fecthUpdatePost(post, postId) {
   return (dispatch) => {
     put(url, post)
       .then(res => res.data)
-      .then(data => {
-        console.log('data', data);
-
-        dispatch(updateFecthPost(data))
-      })
+      .then(data => dispatch(updateFecthPost(data)))
       .catch(e => console.log('error fecthUpdatePost', e))
   }
 }
