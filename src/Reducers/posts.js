@@ -4,6 +4,7 @@ import {
     GET_POST,
     INSERT_POST,
     UPDATE_POST,
+    UPDATE_SCORE_POST,
     DELETE_POST
 } from '../Actions/posts'
 
@@ -18,10 +19,19 @@ export function posts(state = [], action) {
             return newState
         case DELETE_POST:
             return state.filter(post => post.id !== action.post.id)
-        case UPDATE_POST:
+        case UPDATE_SCORE_POST:
             return state.map(post => {
                 if (post.id === action.post.id)
                     return action.post
+                return post
+            })
+        case UPDATE_POST:
+            return state.map(post => {
+                if (post.id === action.post.id) {
+                    post.title = action.post.title;
+                    post.body = action.post.body;
+                }
+
                 return post
             })
         default:
@@ -32,6 +42,8 @@ export function posts(state = [], action) {
 export function post(state = {}, action) {
     switch (action.type) {
         case GET_POST:
+            return action.post
+        case UPDATE_SCORE_POST:
             return action.post
         case UPDATE_POST:
             return action.post

@@ -17,6 +17,7 @@ class App extends Component {
 
         <div id="page-wrap">
           <Switch>
+            <Route path="/edit-post/:post_id" component={FormPost} />
             <Route path="/new" component={FormPost} />
             <Route path="/:category/:post_id" component={PostDetail} />
             <Route path="/:category" component={Category} />

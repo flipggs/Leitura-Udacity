@@ -37,7 +37,7 @@ class Header extends Component {
                 <Link to="/"
                     className={this.state.categoryName === '' ? 'active' : ''}
                 >Home </Link>
-                <Link to="/new" >New Post </Link>
+                <Link to="/new" >Cadastrar Post </Link>
                 {categories.map(category => (
                     <Link to={`/${category.path}`}
                         className={this.state.categoryName === category.categoryName ? 'active' : ''}

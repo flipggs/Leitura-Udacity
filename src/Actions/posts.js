@@ -1,10 +1,11 @@
-import { get, post, deleteData } from '../Services/ReadbleAPI'
+import { get, post, deleteData, put } from '../Services/ReadbleAPI'
 
 export const GET_ALL_POSTS = 'GET_ALL_POSTS'
 export const GET_ALL_POSTS_BY_CATEGORY = 'GET_ALL_POSTS_BY_CATEGORY'
 export const GET_POST = 'GET_POST'
 export const INSERT_POST = 'INSERT_POST'
 export const UPDATE_POST = 'UPDATE_POST'
+export const UPDATE_SCORE_POST = 'UPDATE_SCORE_POST'
 export const DELETE_POST = 'DELETE_POST'
 
 export function getAllPosts(posts) {
@@ -30,7 +31,7 @@ export function getPost(post) {
 
 export function updatePost(post) {
   return {
-    type: UPDATE_POST,
+    type: UPDATE_SCORE_POST,
     post
   }
 }
@@ -38,6 +39,13 @@ export function updatePost(post) {
 export function deletePost(post) {
   return {
     type: DELETE_POST,
+    post
+  }
+}
+
+export function updateFecthPost(post) {
+  return {
+    type: UPDATE_POST,
     post
   }
 }
@@ -103,9 +111,23 @@ export function deleteByPostId(postId) {
   const url = `/posts/${postId}`
 
   return (dispatch) => {
-    deleteData(url, { })
+    deleteData(url, {})
       .then(res => res.data)
       .then(data => dispatch(deletePost(data)))
       .catch(e => console.log('error deleteByPostId', e))
+  }
+}
+
+export function fecthUpdatePost(post, postId) {
+  const url = `/posts/${postId}`
+  return (dispatch) => {
+    put(url, post)
+      .then(res => res.data)
+      .then(data => {
+        console.log('data', data);
+
+        dispatch(updateFecthPost(data))
+      })
+      .catch(e => console.log('error fecthUpdatePost', e))
   }
 }

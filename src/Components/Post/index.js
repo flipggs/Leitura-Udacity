@@ -41,9 +41,9 @@ class Post extends Component {
                     {commentCount} Comentários
                 </span>
                 <div>
-                    <button onClick={() => this.onClickEdit()}>
+                    <Link to={`/edit-post/${id}`}>
                         Editar
-                    </button>
+                    </Link>
 
                     <button onClick={() => this.onClickDelete()}>
                         Remover
