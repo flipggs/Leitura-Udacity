@@ -6,8 +6,9 @@ import Header from './Components/Header'
 import Home from './Views/Home'
 import NotFound from './Views/NotFound'
 import Category from './Views/Category'
-import PostDetail from './Views/PostDetail/index';
-import FormPost from './Views/FormPost/index';
+import PostDetail from './Views/PostDetail'
+import FormPost from './Views/FormPost'
+import FormComment from './Components/FormComment'
 
 class App extends Component {
   render() {
@@ -18,6 +19,7 @@ class App extends Component {
         <div id="page-wrap">
           <Switch>
             <Route path="/edit-post/:post_id" component={FormPost} />
+            <Route path="/edit-comment/:comment_id" component={FormComment} />
             <Route path="/new" component={FormPost} />
             <Route path="/:category/:post_id" component={PostDetail} />
             <Route path="/:category" component={Category} />

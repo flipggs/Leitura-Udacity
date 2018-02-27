@@ -12,11 +12,6 @@ class Post extends Component {
         this.props.updatePost(id, voteType)
     }
 
-    onClickEdit = () => {
-        const { id } = this.props.postData
-        console.log('edit', id);
-    }
-
     onClickDelete = () => {
         const { id } = this.props.postData
         this.props.deletePost(id)

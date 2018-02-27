@@ -1,8 +1,10 @@
 import {
     GET_ALL_COMMENTS_BY_POST_ID,
+    GET_COMMENT,
     INSERT_COMMENT,
     UPDATE_SCORE_COMMENT,
-    DELETE_COMMENT
+    DELETE_COMMENT,
+    UPDATE_COMMENT
 } from '../Actions/comments'
 
 
@@ -21,6 +23,17 @@ export function comments(state = [], action) {
                     return action.comment
                 return comment
             })
+        default:
+            return state
+    }
+}
+
+export function comment(state = {}, action) {
+    switch (action.type) {
+        case GET_COMMENT:
+            return action.comment
+        case UPDATE_COMMENT:
+            return action.comment
         default:
             return state
     }
