@@ -1,66 +1,46 @@
-import React, { Component } from 'react'
-import { connect } from 'react-redux'
+import React from 'react'
 import { Link } from 'react-router-dom'
+import { connect } from 'react-redux'
 
-import './index.css'
 import { getCategories } from '../../Actions/categories'
 
+import './index.css'
 
-class Header extends Component {
+const Header = (props) => {
+    const { categories } = props
 
-    state = {
-        categoryName: ''
-    }
+    if (categories.length === 0)
+        props.getCategories()
 
-    getCategoryName = () => {
-        const { match = {} } = this.props
-        const { params = {} } = match
-        return params.category
-    }
+    return (
+        <header>
+            <nav>
+                <ul className="main-menu">
+                    <li>
+                        <Link to="/">Home </Link>
+                    </li>
+                    <li>
+                        <Link to="/new" >Cadastrar Post </Link>
+                    </li>
+                    {categories.map(category => (
+                        <li key={category.path}>
+                            <Link to={`/${category.path}`} >{category.name}</Link>
+                        </li>
+                    ))}
+                </ul>
+            </nav>
 
-    componentDidMount() {
-        this.props.fetchData();
-        
-        const categoryName = this.getCategoryName()
 
-        if (categoryName)
-            this.setState({ categoryName })
-    }
-
-    render() {
-        const { categories = {} } = this.props
-        //console.log('render categories', JSON.stringify(categories));
-
-        return (
-            <header>
-                
-                <Link to="/"
-                    className={this.state.categoryName === '' ? 'active' : ''}
-                >Home </Link>
-                <Link to="/new" >Cadastrar Post </Link>
-                {categories.map(category => (
-                    <Link to={`/${category.path}`}
-                        className={this.state.categoryName === category.categoryName ? 'active' : ''}
-                        key={category.path}>
-                        {category.name}
-                    </Link>
-                ))}
-            </header>
-        )
-    }
+        </header>
+    )
 }
 
-const mapStateToProps = (state) => {
-    return {
-        categories: state.categories
-    }
-}
+
+const mapStateToProps = ({ categories }) => ({ categories })
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        fetchData: () => {
-            return dispatch(getCategories())
-        }
+        getCategories: () => dispatch(getCategories()),
     }
 }
 

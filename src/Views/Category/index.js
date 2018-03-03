@@ -6,26 +6,31 @@ import ListPosts from './../../Components/ListPosts/index';
 
 class Category extends Component {
 
-    state = {
-        categoryName: ''
-    }
-
-    getCategoryName = () => {
-        const { match = {} } = this.props
-        const { params = {} } = match
-        return params.category
-    }
+    state = { categoryName: '' }
 
     componentDidMount() {
-        const categoryName = this.getCategoryName()
-        this.props.getData(categoryName)
+        //console.log('componentDidMount', this.state)
+        this.setCategoryName(this.props)
+    }
 
-        this.setState({ categoryName })
+    componentWillReceiveProps(nextProps) {
+        //console.log('componentWillReceiveProps', this.state);
+        this.setCategoryName(nextProps)
+    }
+
+    setCategoryName(props) {
+        //console.log('setCategoryName')
+        const { match = {} } = props
+        const { params = {} } = match
+        const { category } = params
+        if (category !== this.state.categoryName) {
+            this.props.getData(category)
+            this.setState({ categoryName: category })
+        }
     }
 
     render() {
-
-        const { posts = [] } = this.props
+        const { posts } = this.props
 
         return (
             <div>
@@ -36,11 +41,7 @@ class Category extends Component {
     }
 }
 
-const mapStateToProps = (state) => {
-    return {
-        posts: state.posts
-    }
-}
+const mapStateToProps = ({ posts }) => ({ posts })
 
 const mapDispatchToProps = (dispatch) => ({
     getData: (idCategory) => dispatch(getPosts(idCategory)),

@@ -1,19 +1,18 @@
-header a{
+.main-menu{
+    display: flex;
+    flex-direction: row;
+    margin: 15px 0;
+    padding: 0;
+}
+
+.main-menu li{
+    list-style: none;
+    margin: 5px;
+}
+
+.main-menu li a{
+    text-decoration: none;
+    color: #000;
+    background: #afafaf;
     padding: 10px;
-    background: #a6a6a6;
-    text-decoration: none;
-    margin: 10px;
-    text-align: center;
-    line-height: 28px;
-    font-size: 14px;
-}
-
-header a:hover,
-header a:visited{
-    text-decoration: none;
-}
-
-.active{
-    background: black;
-    color: #fff;
 }
