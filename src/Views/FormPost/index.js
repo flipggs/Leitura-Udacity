@@ -57,8 +57,6 @@ class FormPost extends Component {
 
         const { title, author, body } = values
 
-
-
         if (!this.state.isUpdate) {
             if (!title || !author || !body)
                 window.alert('É necessário preencher todos os campos')

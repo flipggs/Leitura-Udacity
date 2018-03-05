@@ -47,21 +47,31 @@ class FormComment extends Component {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
 
-        if (!this.state.isUpdate) {
-            const comment = {
-                parentId: this.props.postId,
-                id: uuidv1(),
-                timestamp: Date.now,
-                ...values
-            }
+        const { author, body } = values
 
-            this.props.insertComment(comment)
+        if (!this.state.isUpdate) {
+            if (!author || !body)
+                window.alert('É necessário preencher todos os campos')
+            else {
+                const comment = {
+                    parentId: this.props.postId,
+                    id: uuidv1(),
+                    timestamp: Date.now,
+                    ...values
+                }
+
+                this.props.insertComment(comment)
+            }
         }
         else {
-            this.props.updateComment(this.state.id, {
-                body: values.body,
-                timestamp: Date.now
-            })
+            if (!author || !body)
+                window.alert('É necessário preencher todos os campos')
+            else {
+                this.props.updateComment(this.state.id, {
+                    body: values.body,
+                    timestamp: Date.now
+                })
+            }
         }
 
     }
