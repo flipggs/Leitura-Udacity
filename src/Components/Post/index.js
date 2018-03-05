@@ -55,14 +55,23 @@ class Post extends Component {
 
     render() {
         const { post_loading } = this.props
+        let postIsExist = true;
 
         if (post_loading)
             return <h1>Loading...</h1>
         else {
             let { postData } = this.props
 
-            if (!postData)
-                postData = this.props.post
+            if (!postData) {
+                if (this.props.post.title)
+                    postData = this.props.post
+                else
+                    postIsExist = false;
+            }
+
+            if (!postIsExist) {
+                return <h1>Post não encontrado</h1>
+            }
 
             const { comments } = this.props
             const { author, title, category, body, id, commentCount, voteScore } = postData
