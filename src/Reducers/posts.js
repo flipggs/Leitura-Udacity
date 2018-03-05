@@ -5,8 +5,27 @@ import {
     INSERT_POST,
     UPDATE_POST,
     UPDATE_SCORE_POST,
-    DELETE_POST
+    DELETE_POST,
+    LOADING_POST,
+    SUCCESS_POST
 } from '../Actions/posts'
+
+export function post_loading(state = false, action) {
+    switch (action.type) {
+        case LOADING_POST:
+            return action.isLoading
+        default:
+            return state
+    }
+}
+export function post_success(state = false, action) {
+    switch (action.type) {
+        case SUCCESS_POST:
+            return action.isSuccess
+        default:
+            return state
+    }
+}
 
 export function posts(state = [], action) {
     switch (action.type) {
@@ -47,6 +66,8 @@ export function post(state = {}, action) {
             return action.post
         case UPDATE_POST:
             return action.post
+        case LOADING_POST:
+            return state
         default:
             return state
     }

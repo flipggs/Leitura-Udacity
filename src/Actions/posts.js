@@ -7,6 +7,22 @@ export const INSERT_POST = 'INSERT_POST'
 export const UPDATE_POST = 'UPDATE_POST'
 export const UPDATE_SCORE_POST = 'UPDATE_SCORE_POST'
 export const DELETE_POST = 'DELETE_POST'
+export const LOADING_POST = 'LOADING_POST'
+export const SUCCESS_POST = 'SUCCESS_POST'
+
+export function post_loading(isLoading) {
+  return {
+    type: LOADING_POST,
+    isLoading
+  }
+}
+
+export function post_success(isSuccess) {
+  return {
+    type: LOADING_POST,
+    isSuccess
+  }
+}
 
 export function getAllPosts(posts) {
   return {
@@ -67,17 +83,19 @@ export function getPosts(category) {
     get(url)
       .then(res => res.data)
       .then(data => dispatch(getAllPostsByCategory(data)))
-      .catch((e) => {
-        console.log('error', e)
-      })
+      .catch((e) => console.log('error', e))
   }
 }
 
 export function getPostById(postId) {
   return (dispatch) => {
+    dispatch(post_loading(true))
     get(`/posts/${postId}`)
       .then(res => res.data)
-      .then(data => dispatch(getPost(data)))
+      .then(data => {
+        dispatch(post_loading(false))
+        return dispatch(getPost(data))
+      })
       .catch(e => console.log('error getPostById', e))
   }
 }

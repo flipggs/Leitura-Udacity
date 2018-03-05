@@ -6,8 +6,8 @@ const VoteScore = (props) => {
     return (
         <div>
             <span>
-                Score:
-                </span>
+                <b>Score:</b>
+            </span>
             <button onClick={() => onClickVoteScore('upVote')}>
                 +
                 </button>
