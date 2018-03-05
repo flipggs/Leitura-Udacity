@@ -55,17 +55,28 @@ class FormPost extends Component {
         e.preventDefault()
         const values = serializeForm(e.target, { hash: true })
 
-        if (!this.state.isUpdate) {
-            const post = {
-                id: uuidv1(),
-                timestamp: Date.now(),
-                ...values
-            }
+        const { title, author, body } = values
 
-            this.props.insertPost(post)
+
+
+        if (!this.state.isUpdate) {
+            if (!title || !author || !body)
+                window.alert('É necessário preencher todos os campos')
+            else {
+                const post = {
+                    id: uuidv1(),
+                    timestamp: Date.now(),
+                    ...values
+                }
+
+                this.props.insertPost(post)
+            }
         }
         else {
-            this.props.updatePost(values, this.state.postId)
+            if (!title || !body)
+                window.alert('É necessário preencher todos os campos')
+            else
+                this.props.updatePost(values, this.state.postId)
         }
 
     }
