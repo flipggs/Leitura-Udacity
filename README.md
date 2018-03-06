@@ -8,7 +8,7 @@ Clone the GitHub repository and use npm to install.
 
 ```sh
 $ git clone https://github.com/flipggs/Leitura-Udacity
-$ cd keitura-udacity
+$ cd leitura-udacity
 $ npm install
 ```
 
