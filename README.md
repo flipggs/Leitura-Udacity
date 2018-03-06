@@ -1,10 +1,10 @@
-# Read Project
+# Projeto Leitura
 
-This project was made for the acomplishment of the second module of the React NandoDegree program by Udacity.
+Este projeto foi feito para a realização do módulo 3 do programa React NanoDegree da Udacity.
 
-## Installation
+## Instalação
 
-Clone the GitHub repository and use npm to install.
+Clone o repositório GitHub e use npm para instalar.
 
 ```sh
 $ git clone https://github.com/flipggs/Leitura-Udacity
@@ -14,7 +14,7 @@ $ npm install
 
 ## Usage
 
-Before start the project you must download the server and run the code on the 3001 port because the project use this server on this port to get the data from the endpoints.
+Antes de iniciar o projeto, você deve baixar o servidor e executar o código na porta 3001 porque o projeto usa este servidor nesta porta para obter os dados dos pontos finais.
 
 ```sh
 $ git clone git@github.com:udacity/reactnd-project-readable-starter.git
@@ -22,10 +22,10 @@ $ cd reactnd-project-readable-starter/api-server
 $ npm install
 ```
 
-After you clone the server you can start the application with:
+Depois de clonar o servidor, você pode iniciar o aplicativo com:
 
 ```sh
 $ npm start
 ```
 
-Remember to start both applications the server for the API and the read project to run the App.
+Lembre-se de iniciar ambos os aplicativos, o servidor da API e o projeto de leitura para executar o aplicativo.
